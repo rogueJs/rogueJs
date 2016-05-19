@@ -5,11 +5,10 @@ var c = game.getContext('2d');
 var mouseX, mouseY;
 var movement;
 
-var tileMap = populateTileMap();
 
-var player = new Player(3,2);
+// var tileMap = populateTileMap();
 
-game.addEventListener('mousemove', trackMouse);
+var gameWorld = new GameWorld();
 
 document.addEventListener('keydown', keyMove);
 

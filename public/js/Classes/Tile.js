@@ -2,11 +2,16 @@
 
 class Tile {
 
-	constructor(color) {
+	constructor(type) {
 
-		this.color = color;
+		this.type = type;
+		
+		if( this.type == 'brick' ) {
+			this.colidable = true;
+		}
+
 		this.image = new Image();
-		this.image.src = randomSprite();
+		this.image.src = 'sprites/' + type + '.jpg';
 
 /* Vända logiken så att en random typ genereras och sedan tilldelas 
 bild enligt det värdet */
@@ -25,8 +30,6 @@ bild enligt det värdet */
 
 
 		this.draw = function(x, y) {
-			c.fillStyle = this.color;
-
 			c.drawImage(this.image, x, y);
 		}
 
@@ -37,19 +40,16 @@ bild enligt det värdet */
 	}
 }
 
-function randomSprite() {
+function randomType() {
 
-	var tiles = [
-		'sprites/grass.jpg',
-		'sprites/brick.jpg',
-		'sprites/grey.jpg',
-		'sprites/grey.jpg',
-		'sprites/grey.jpg',
-		
+	var types = [
+		'grass',
+		'brick',
+		'grey',
+		'grey',
+		'grey'
 	];
 
 	var index = Math.floor(Math.random() * 5);
-	// console.log(index)
-
-	return tiles[index];
+	return types[index];
 }

@@ -1,27 +1,36 @@
 "use strict";
 
-function populateTileMap() {
+class Map {
 
-	var xMax = 16;
-	var yMax= 16;
+	constructor() {
 
-/* Create outher array*/
-	var tileMap = new Array(xMax);
+		var xMax = 16;
+		var yMax= 16;
 
-/* Create inner arrays*/
+	/* Create outher array*/
+		this.tileMap = new Array(xMax);
 
-	for( var i = 0; i < xMax; i++ ) {
-		tileMap[i] = new Array(yMax);
-	}
+	/* Create inner arrays*/
 
-/* Populate every spot with a tile */
-	for( var x = 0; x < xMax; x++ ) {
-		for( var y = 0; y < yMax; y++ ) {
-			tileMap[x][y] = new Tile(randomColor());
-			// tileMap[x][y] = new Tile(randomTile());
+		for( var i = 0; i < xMax; i++ ) {
+			this.tileMap[i] = new Array(yMax);
+		}
 
+	/* Populate every spot with a tile */
+		for( var x = 0; x < xMax; x++ ) {
+			for( var y = 0; y < yMax; y++ ) {
+				// this.tileMap[x][y] = new Tile(randomColor());
+				this.tileMap[x][y] = new Tile(randomType());
+			}
+		}
+
+		this.draw = function() {
+			for( var x = 0, length = this.tileMap.length;x < length; x++ ) {
+				for( var y = 0; y < length; y++ ) {
+					this.tileMap[x][y].draw(x * 25, y * 25);	
+				}
+			}
 		}
 	}
-
-	return tileMap;
 }
+

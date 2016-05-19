@@ -15,34 +15,17 @@ game loop
  */
 function gameLoop() {
 
-	// checkMove();
+	gameWorld.validateMove();
 	render();
-
 }
 
 function render() {
 
-
 	clearCanvas();
 
-	/* map draw: */
-	for( var x = 0, length = tileMap.length;x < length; x++ ) {
-		for( var y = 0; y < length; y++ ) {
-			if( x == mouseX && y == mouseY) {
-				tileMap[x][y].drawOutline(x * 25, y * 25);
-			}
-			else {
-				tileMap[x][y].draw(x * 25, y * 25);
+	gameWorld.map.draw();
 
-			}
-		}
-	}
-	/*Insert map-stuff draw here */
-
-
-	player.draw();
-	
-
+	gameWorld.player.draw(gameWorld.playerX, gameWorld.playerY);
 }
 
 function clearCanvas() {
@@ -52,36 +35,42 @@ function clearCanvas() {
 function stopGame() {
 	clearInterval(intervalId);
 }
+
 function keyMove(e){
 
-
-	key = e.keyCode;
+	var key = e.keyCode;
 
 	switch(key) {
 
 		case 37:
-			player.playerX --;
+			// player.playerX --;
+			gameWorld.direction = 'left';
+			// console.log(gameWorld.direction);
 			break
 		case 39:
-			player.playerX++;
+			// player.playerX++;
+			gameWorld.direction = 'right';
 			break;
 		case 38:
-			player.playerY--;
+			// player.playerY--;
+			gameWorld.direction = 'up';
 			break;
 		case 40:
-			player.playerY++;
+			// player.playerY++;
+			gameWorld.direction = 'down';
 			break;
 	}
-	console.log(tileMap[player.playerX][player.playerY]);
+	
+	// console.log(map.tileMap[player.playerX][player.playerY]);
 
-	tileAbove = tileMap[player.playerX][player.playerY -1];
-	tileBelow = tileMap[player.playerX][player.playerY +1];
-	tileLeft = tileMap[player.playerX -1][player.playerY];
-	tileRight = tileMap[player.playerX +1][player.playerY];
+	// var tileAbove = map.tileMap[player.playerX][player.playerY -1];
+	// var tileBelow = map.tileMap[player.playerX][player.playerY +1];
+	// var tileLeft = map.tileMap[player.playerX -1][player.playerY];
+	// var tileRight = map.tileMap[player.playerX +1][player.playerY];
 
-	console.log(tileAbove.tileType);
-	console.log(tileBelow.tileType);
-	console.log(tileLeft.tileType);
-	console.log(tileRight.tileType);
+	// console.log(tileAbove.tileType);
+	// console.log(tileBelow.tileType);
+	// console.log(tileLeft.tileType);
+	// console.log(tileRight.tileType);
 
 }
