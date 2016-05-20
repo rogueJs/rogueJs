@@ -108,6 +108,8 @@ class GameWorld {
 			if( this.player.equipped.indexOf('sword') != -1  && this.player.battleStrength > enemy.strength ) {
 				tile.colidable = false;
 				tile.enemy = null;
+				// this.player.experience += Math.floor(enemy.strength / 2);
+				// this.player.level = (Math.floor(this.player.experience / 10));
 			}
 		}
 	}
