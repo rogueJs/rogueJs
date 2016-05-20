@@ -1,17 +1,15 @@
 'use strict';
 
-class Item {
+class Enemy {
 	
 	constructor(type) {
 
 		this.type = type;
 
-		if( this.type == 'sword' ) {
-			this.collectable = true;
-		}
-
 		this.image = new Image();
 		this.image.src = 'sprites/' + type + '.png';
+
+		this.strength = randomEnemyStrength();
 
 		this.draw = function(x, y) {
 			c.drawImage(this.image, x, y);
@@ -19,13 +17,17 @@ class Item {
 	}
 }
 
-function randomItemType() {
+function randomEnemyType() {
 
 	var types = [
-		'sword',
-		'gem'
+		'octo',
+		'skull'
 	];
 
 	var index = Math.floor(Math.random() * 2);
 	return types[index];
+}
+
+function randomEnemyStrength() {
+	return Math.random() * 10;
 }

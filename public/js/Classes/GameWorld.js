@@ -40,7 +40,13 @@ class GameWorld {
 			}
 
 			this.validateMove();
-			this.discoverTile();
+			this.discoverTile();			
+
+			if( this.map.tileMap[this.playerX][this.playerY].item ) {
+				var item = this.map.tileMap[this.playerX][this.playerY].item;
+				this.player.equip(item.type);
+				this.map.tileMap[this.playerX][this.playerY].item = null;
+			}
 		}
 
 		this.validateMove = function() {
@@ -49,20 +55,32 @@ class GameWorld {
 					if( !this.tileLeft.colidable ) {
 						this.playerX --;
 					}
+					else if( this.tileLeft.enemy ) {
+						this.resolveBattle(this.tileLeft.enemy, this.tileLeft);
+					}
 					break;
 				case 'right':
 					if( !this.tileRight.colidable ) {
 						this.playerX ++;
+					}
+					else if( this.tileRight.enemy ) {
+						this.resolveBattle(this.tileRight.enemy, this.tileRight);
 					}
 					break;
 				case 'up':
 					if( !this.tileAbove.colidable ) {
 						this.playerY --;
 					}
+					else if( this.tileAbove.enemy ) {
+						this.resolveBattle(this.tileAbove.enemy, this.tileAbove);
+					}
 					break;
 				case 'down':
 					if( !this.tileBelow.colidable ) {
 						this.playerY ++;
+					}
+					else if( this.tileBelow.enemy ) {
+						this.resolveBattle(this.tileBelow.enemy, this.tileBelow);
 					}
 					break;
 				default:
@@ -78,6 +96,19 @@ class GameWorld {
 			this.tileAbove.discovered = true;
 			this.tileBelow.discovered = true;
 			this.tileCurrent.discovered = true;
+		}
+
+		this.resolveBattle = function(enemy, tile) {
+			
+			this.player.battleStrength = this.player.level + this.player.strength;
+
+			console.log(this.player.battleStrength);
+			console.log(enemy.strength);
+
+			if( this.player.equipped.indexOf('sword') != -1  && this.player.battleStrength > enemy.strength ) {
+				tile.colidable = false;
+				tile.enemy = null;
+			}
 		}
 	}
 }

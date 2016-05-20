@@ -7,11 +7,19 @@ class Tile {
 		this.type = type;
 		this.discovered = false;
 		
-		if( this.type == 'bush' && Math.random() > 0.9 ) {
+		if( this.type == 'bush' && Math.random() > 0.2 ) {
 			this.item = new Item(randomItemType());
 		}
 		else {
 			this.item = null;
+		}
+
+		if( this.item == null && this.type != 'brick' && Math.random() > 0.2 ) {
+			this.enemy = new Enemy(randomEnemyType());
+			this.colidable = true;
+		}
+		else {
+			this.enemy == null;
 		}
 
 		if( this.type == 'brick' ) {
@@ -27,6 +35,9 @@ class Tile {
 
 				if( this.item != null ) {
 					this.item.draw(x, y);
+				}
+				if( this.enemy != null ) {
+					this.enemy.draw(x, y);
 				}
 			}
 			else {
