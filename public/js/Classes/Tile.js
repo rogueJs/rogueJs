@@ -53,10 +53,10 @@ class Tile {
 function randomType(seed, x, y) {
 
 	var types = [
-		'bush',
+		'grass',
 		'brick',
 		'grass',
-		'grass',
+		'bush',
 		'grass'
 	];
 

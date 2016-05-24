@@ -14,6 +14,7 @@ class Player {
 
 		this.strength = 0;
 		this.battleStrength = 0;
+		this.health = 10;
 
 		this.equipped = ['sword'];
 
@@ -25,9 +26,9 @@ class Player {
 			else if( equipment == 'gem' ) {
 				this.experience += 5;
 				this.level = (Math.floor(this.experience / 10));
-				console.log('exp gem:' + this.experience);
-				console.log('level gem:' + this.level);
-
+			}
+			else if( equipment == 'heart' ) {
+				this.health += 1;
 			}
 		}
 	}

@@ -22,6 +22,7 @@ class GameWorld {
 			this.updateSurround();			
 			this.validateMove();
 			this.discoverTile();
+			displayStats(this.player.experience, this.player.level, this.player.strength, this.player.health);
 
 
 			if( this.map.tileMap[this.playerX][this.playerY].type != 'edge' ) {
@@ -116,11 +117,16 @@ class GameWorld {
 			
 			this.player.battleStrength = this.player.level + this.player.strength;
 
+			msgTarget.innerHTML = 'Player Battle Strength: ' + this.player.battleStrength + '. Monster strength: ' + enemy.strength;
+
 			if( this.player.equipped.indexOf('sword') != -1  && this.player.battleStrength > enemy.strength ) {
 				tile.colidable = false;
 				tile.enemy = null;
 				this.player.experience += Math.floor(enemy.strength / 2);
 				this.player.level = (Math.floor(this.player.experience / 10));
+			}
+			else {
+				this.player.health -= Math.round(enemy.strength);
 			}
 		}
 

@@ -23,9 +23,10 @@ function randomItemType() {
 
 	var types = [
 		'sword',
-		'gem'
+		'gem',
+		'heart'
 	];
 
-	var index = Math.floor(Math.random() * 2);
+	var index = Math.floor(Math.random() * 3);
 	return types[index];
 }

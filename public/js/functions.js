@@ -24,6 +24,8 @@ function stopGame() {
 }
 
 function keyMove(e){
+	
+	msgTarget.innerHTML = '';
 
 	var key = e.keyCode;
 
@@ -41,4 +43,11 @@ function keyMove(e){
 			gameWorld.direction = 'down';
 			break;
 	}
+}
+
+function displayStats(exp, lev, str, hp) {
+	expTarget.innerHTML = exp;
+	levTarget.innerHTML = lev;
+	strTarget.innerHTML = str;
+	healthTarget.innerHTML = hp;
 }
