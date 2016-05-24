@@ -10,12 +10,12 @@ class Player {
 			c.stroke();
 		}
 		this.level = 1;
-		this.experience = 0;
+		this.experience = 50;
 
 		this.strength = 0;
 		this.battleStrength = 0;
 
-		this.equipped = [];
+		this.equipped = ['sword'];
 
 		this.equip = function(equipment) {
 			this.equipped.push(equipment);
@@ -25,6 +25,9 @@ class Player {
 			else if( equipment == 'gem' ) {
 				this.experience += 5;
 				this.level = (Math.floor(this.experience / 10));
+				console.log('exp gem:' + this.experience);
+				console.log('level gem:' + this.level);
+
 			}
 		}
 	}

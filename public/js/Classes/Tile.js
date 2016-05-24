@@ -14,20 +14,22 @@ class Tile {
 			this.item = null;
 		}
 
-		if( this.item == null && this.type != 'brick' && Math.random() > 0.2 ) {
+		if( this.type == 'brick' || this.type == 'edge' ) {
+			this.colidable = true;
+		}
+
+		if( this.item == null && this.type != 'brick' && Math.random() > 0.8 ) {
 			this.enemy = new Enemy(randomEnemyType());
 			this.colidable = true;
 		}
 		else {
 			this.enemy == null;
 		}
-
-		if( this.type == 'brick' ) {
-			this.colidable = true;
+		if( this.type != 'edge' ) {
+			this.image = new Image();
+			this.image.src = 'sprites/' + type + '.jpg';
 		}
-
-		this.image = new Image();
-		this.image.src = 'sprites/' + type + '.jpg';
+		
 		this.draw = function(x, y) {
 
 			if( this.discovered ) {
@@ -48,7 +50,7 @@ class Tile {
 	}
 }
 
-function randomType() {
+function randomType(seed, x, y) {
 
 	var types = [
 		'bush',
@@ -58,6 +60,9 @@ function randomType() {
 		'grass'
 	];
 
-	var index = Math.floor(Math.random() * 5);
+	var rng = new Math.seedrandom(x * y * seed);
+
+	var index = Math.floor(rng() * 5);
+
 	return types[index];
 }

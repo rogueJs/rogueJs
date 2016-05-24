@@ -2,11 +2,10 @@
 
 class Map {
 
-	constructor() {
+	constructor(seed) {
 
 		var xMax = 16;
 		var yMax= 16;
-
 		/* Create outher array*/
 		this.tileMap = new Array(xMax);
 
@@ -18,8 +17,7 @@ class Map {
 		/* Populate every spot with a tile */
 		for( var x = 0; x < xMax; x++ ) {
 			for( var y = 0; y < yMax; y++ ) {
-				// this.tileMap[x][y] = new Tile(randomColor());
-				this.tileMap[x][y] = new Tile(randomType());
+				this.tileMap[x][y] = new Tile(randomType( seed, x, y  ) );
 			}
 		}
 
