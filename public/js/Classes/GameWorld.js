@@ -7,6 +7,8 @@ class GameWorld {
 		this.mapOffsetX = 1;
 		this.mapOffsetY = 1;
 
+		this.discoveredTiles = {};
+
 		this.player = new Player();
 		this.playerX = 3;
 		this.playerY = 14;
@@ -15,7 +17,6 @@ class GameWorld {
 
 		this.tileCurrent = this.map.tileMap[this.playerX][this.playerY];
 	}
-
 
 	update() {
 		this.tileCurrent = this.map.tileMap[this.playerX][this.playerY];
@@ -114,7 +115,6 @@ class GameWorld {
 	}
 
 	resolveBattle(enemy, tile) {
-
 		this.player.battleStrength = this.player.level + this.player.strength;
 
 		msgTarget.innerHTML += 'Player Battle Strength: ' + this.player.battleStrength + '. Enemy Battle Strength: ' + enemy.strength + '<br>';
@@ -142,7 +142,6 @@ class GameWorld {
 	}
 
 	changeMap() {
-
 		msgTarget.innerHTML += 'You wander into new lands..<br>';
 		switch(this.direction) {
 			case 'left':
@@ -164,11 +163,47 @@ class GameWorld {
 		}
 		this.direction='';
 
+		var firstRun = true;
+
+		if( this.map ) {
+			firstRun = false;
+			var tiles = new Array(16);
+
+			for( var i = 0; i < 16; i++ ) {
+				tiles[i] = new Array(16);
+			}
+
+			for( var x = 0, length = this.map.tileMap.length; x < length; x++ ) {
+				for( var y = 0; y < 16; y++ ) {
+					if( this.map.tileMap[x][y].discovered ) {
+						tiles[x][y] = true;
+					}
+					else {
+						tiles[x][y] = false;
+					}
+				}
+			}
+			this.discoveredTiles[this.seed] = tiles;
+		}
+
 		this.rng = new Math.seedrandom(this.mapOffsetX * this.mapOffsetY);
 		this.seed = this.rng();
 		this.map = new Map(this.seed);
-		this.update();
 
+		if( !firstRun ) {
+			if( this.discoveredTiles[this.seed]) {
+				var thisMapsDiscoveredTiles = this.discoveredTiles[this.seed];
+				for( var i = 0, length = thisMapsDiscoveredTiles.length; i < length; i ++ ) {
+					for( var j = 0; j < 16; j ++ ) {
+						if( thisMapsDiscoveredTiles[i][j] ) {
+							this.map.tileMap[i][j].discovered = true;
+						}
+					}
+				}
+			}
+		}
+
+		this.update();
 	}
 
 	updateSurround() {

@@ -20,9 +20,8 @@ class Map {
 				this.tileMap[x][y] = new Tile(randomType( seed, x, y  ) );
 			}
 		}
-
-
 	}
+	
 	draw() {
 		for( var x = 0, length = this.tileMap.length;x < length; x++ ) {
 			for( var y = 0; y < length; y++ ) {
