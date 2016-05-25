@@ -1,9 +1,10 @@
 "use strict";
 
 class Building {
-    constructor(w, h) {
+    constructor(seed, w = 3, h = 2) {
         this.w = w;
         this.h = h;
+        this.rng = new Math.seedrandom(seed);
 
         //initialize the map
         this.map = new Array(this.h);
@@ -24,8 +25,8 @@ class Building {
 
         while (wallsLeftToplace > 0 ){
             // get a random coordinate
-            let i = Math.floor(Math.random() * this.h);
-            let j = Math.floor(Math.random() * this.w); 
+            let i = Math.floor(this.rng(wallsLeftToplace) * this.h);
+            let j = Math.floor(this.rng(wallsLeftToplace) * this.w); 
 
             if (this.map[i][j] == 0) {
                 this.map[i][j] = 1 ;
@@ -33,6 +34,35 @@ class Building {
             }
         }
     }
+
+    scaleTo(scale) {
+        // make a square array to hold our building
+        var square = new Array(scale);
+        for (var i = 0, len = square.length; i < len; i++) {
+            square[i] = new Array(scale);
+        }
+
+        // fill it with 0
+        for (var i = 0, len = square.length; i < len; i++) {
+            for (var j = 0, lan = square[i].length; j < lan; j++) {
+                square[i][j] = 0;
+            }
+        }
+
+        for (var i = 0, len = square.length; i < len; i++) {
+            for (var j = 0, lan = square[i].length; j < lan; j++) {
+
+                let iInSmall = Math.floor((i / square.length) * this.map.length);
+                let jInSmall = Math.floor((j / square.length) * this.map[0].length);
+
+                if (this.map[iInSmall][jInSmall] == 1){
+                    square[i][j] = 1;
+                }
+            }
+        }
+
+        return square;
+    } 
 
     logBuilding() {
         for (var x = 0, len = this.map.length ; x < len; x++) {

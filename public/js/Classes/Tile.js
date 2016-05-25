@@ -55,7 +55,7 @@ function randomType(seed, x, y) {
 	var types = [
 	'grass',
 	'bush',
-	'brick',
+	'grass',
 	'grass',
 	'grass'
 	];
