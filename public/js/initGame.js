@@ -12,7 +12,6 @@ var consoleTarget = (document).getElementById('console');
 document.addEventListener('keydown', keyMove);
 document.getElementById('stop').addEventListener('click', stopGame);
 
-
 var game, c, movement, gameWorld, intervalId, consoleInterval;
 
 initializeGame();
@@ -30,3 +29,4 @@ function initializeGame() {
 
 	consoleInterval = setInterval(updateConsole, 100);
 }
+
