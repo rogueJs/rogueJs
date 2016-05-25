@@ -119,7 +119,14 @@ class GameWorld {
 
 		msgTarget.innerHTML += 'Player Battle Strength: ' + this.player.battleStrength + '. Enemy Battle Strength: ' + enemy.strength + '<br>';
 
-		if( this.player.equipped.indexOf('sword') != -1  && this.player.battleStrength > enemy.strength ) {
+		if( this.player.equipped.indexOf('sword') != -1 ){ /* Has sword */
+
+		}
+		else { /* No sword */
+
+		}
+		
+		if( this.player.battleStrength > enemy.strength ) {
 			tile.colidable = false;
 			tile.enemy = null;
 
@@ -129,6 +136,10 @@ class GameWorld {
 		else {
 			this.player.health -= Math.floor(enemy.strength);
 			msgTarget.innerHTML += 'Defeat. ' + Math.floor(enemy.strength) + ' health was lost.<br>';
+
+			var index = this.player.equipped.indexOf('sword');
+			this.player.equipped.splice(index, 1);
+			this.player.image.src = 'sprites/heroNoSword.png';
 		}
 	}
 
