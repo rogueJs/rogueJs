@@ -9,7 +9,6 @@ class GameWorld {
 
 		this.seed = this.rng();
 		this.map = new Map(this.seed);
-			console.log(this.map);
 
 		this.player = new Player();
 		this.playerX = 3;
