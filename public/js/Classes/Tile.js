@@ -29,23 +29,23 @@ class Tile {
 			this.image = new Image();
 			this.image.src = 'sprites/' + type + '.jpg';
 		}
-		
-		this.draw = function(x, y) {
+	}
+	
+	draw(x, y) {
 
-			if( this.discovered ) {
-				c.drawImage(this.image, x, y);
+		if( this.discovered ) {
+			c.drawImage(this.image, x, y);
 
-				if( this.item != null ) {
-					this.item.draw(x, y);
-				}
-				if( this.enemy != null ) {
-					this.enemy.draw(x, y);
-				}
+			if( this.item != null ) {
+				this.item.draw(x, y);
 			}
-			else {
-				c.fillStyle = '#000';
-				c.fillRect(x, y, 25, 25);
+			if( this.enemy != null ) {
+				this.enemy.draw(x, y);
 			}
+		}
+		else {
+			c.fillStyle = '#000';
+			c.fillRect(x, y, 25, 25);
 		}
 	}
 }
@@ -53,16 +53,14 @@ class Tile {
 function randomType(seed, x, y) {
 
 	var types = [
-		'grass',
-		'brick',
-		'grass',
-		'bush',
-		'grass'
+	'grass',
+	'bush',
+	'brick',
+	'grass',
+	'grass'
 	];
 
-	var rng = new Math.seedrandom(x * y * seed);
-
+	var rng = new Math.seedrandom((x + 1) * (y + 1) * seed);
 	var index = Math.floor(rng() * 5);
-
 	return types[index];
 }

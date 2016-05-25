@@ -12,19 +12,19 @@ class Item {
 
 		this.image = new Image();
 		this.image.src = 'sprites/' + type + '.png';
+	}
 
-		this.draw = function(x, y) {
-			c.drawImage(this.image, x, y);
-		}
+	draw(x, y) {
+		c.drawImage(this.image, x, y);
 	}
 }
 
 function randomItemType() {
 
 	var types = [
-		'sword',
-		'gem',
-		'heart'
+	'sword',
+	'gem',
+	'heart'
 	];
 
 	var index = Math.floor(Math.random() * 3);
