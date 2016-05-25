@@ -1,8 +1,6 @@
 "use strict";
 
 class Map {
-
-<<<<<<< HEAD
     constructor(seed) {
         this.xMax = 16;
         this.yMax= 16;
