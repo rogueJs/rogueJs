@@ -32,17 +32,16 @@ class Building {
         wallsLeftToplace--;
       }
     }
+  }
 
-    this.logBuilding = function() {
-      for (var x = 0, len = this.map.length ; x < len; x++) {
-        let row = '';
-        for (var y = 0, lan = this.map[x].length; y < lan; y++) {
-          row += this.map[x][y];
-        }
-        console.log(row);
+  logBuilding() {
+    for (var x = 0, len = this.map.length ; x < len; x++) {
+      let row = '';
+      for (var y = 0, lan = this.map[x].length; y < lan; y++) {
+        row += this.map[x][y];
       }
+      console.log(row);
     }
-
   }
 }
 
