@@ -24,8 +24,6 @@ function stopGame() {
 }
 
 function keyMove(e){
-	
-	msgTarget.innerHTML = '';
 
 	var key = e.keyCode;
 
@@ -42,6 +40,13 @@ function keyMove(e){
 		case 40:
 			gameWorld.direction = 'down';
 			break;
+		case 32:
+			if( gameWorld.player.health <= 0 ) {
+				clearInterval(intervalId);
+				clearInterval(consoleInterval);
+				initializeGame();
+			}
+			break;
 	}
 }
 
@@ -50,4 +55,14 @@ function displayStats(exp, lev, str, hp) {
 	levTarget.innerHTML = lev;
 	strTarget.innerHTML = str;
 	healthTarget.innerHTML = hp;
+}
+
+function endGame() {
+	msgTarget.innerHTML += '<br>GAME OVER!<br>Hit space to start over';
+	clearInterval(intervalId);
+	// clearInterval(consoleInterval);
+}
+
+function updateConsole() {
+	consoleTarget.scrollTop = consoleTarget.scrollHeight;
 }

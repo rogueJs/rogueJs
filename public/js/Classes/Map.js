@@ -21,11 +21,12 @@ class Map {
 			}
 		}
 
-		this.draw = function() {
-			for( var x = 0, length = this.tileMap.length;x < length; x++ ) {
-				for( var y = 0; y < length; y++ ) {
-					this.tileMap[x][y].draw(x * 25, y * 25);	
-				}
+
+	}
+	draw() {
+		for( var x = 0, length = this.tileMap.length;x < length; x++ ) {
+			for( var y = 0; y < length; y++ ) {
+				this.tileMap[x][y].draw(x * 25, y * 25);	
 			}
 		}
 	}
