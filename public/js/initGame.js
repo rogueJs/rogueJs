@@ -16,7 +16,6 @@ var game, c, movement, gameWorld, intervalId, consoleInterval;
 
 initializeGame();
 
-
 function initializeGame() {
 	game = (document).getElementById('game');
 

@@ -2,13 +2,7 @@
 class Player {
 
 	constructor() {
-		this.draw = function(x, y) {
-			c.strokeStyle = 'rgb(100, 60, 10)';
-			c.beginPath();
-			c.arc((x * 25) + 12.5, (y * 25) + 12.5, 10, 0, Math.PI*2);
-			c.lineWidth = 5;
-			c.stroke();
-		}
+
 		this.level = 0;
 		this.experience = 0;
 
@@ -16,12 +10,22 @@ class Player {
 		this.battleStrength = 0;
 		this.health = 10;
 
-		this.equipped = ['sword'];
+		this.equipped = [];
+		this.image = new Image;
+
+		this.image.src = 'sprites/heroNoSword.png';
+		
+
+		this.draw = function(x, y) {
+			c.drawImage(this.image, (x * 25), (y * 25));
+		}
+		
 	}
 	equip(equipment) {
 		this.equipped.push(equipment);
 		if( equipment == 'sword' ) {
 			this.strength ++;
+			this.image.src = 'sprites/hero.png';
 			msgTarget.innerHTML += 'You picked up a ' + equipment + '! Your strength increases.<br>';
 		}
 		else if( equipment == 'gem' ) {
